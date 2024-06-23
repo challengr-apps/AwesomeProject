@@ -1,0 +1,50 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: ruby:3.0.0
+    steps:
+      - checkout
+      - run:
+          name: Sleep for 3 min
+          command: sleep 180
+  api_tests:
+    docker:
+      - image: ruby:3.0.0
+    steps:
+      - checkout
+      - run:
+          name: Sleep for 2 min
+          command: sleep 120
+  package:
+    docker:
+      - image: ruby:3.0.0
+    steps:
+      - checkout
+      - run:
+          name: Sleep for 3 min
+          command: sleep 180
+  deploy:
+    docker:
+      - image: ruby:3.0.0
+    steps:
+      - checkout
+      - run:
+          name: Sleep for 2 min
+          command: sleep 120
+
+workflows:
+  pipeline:
+    jobs:
+      - build
+      - api_tests
+      - package
+      - deploy_approval:
+          type: approval
+          requires:
+            - build
+            - package
+      - deploy:
+          requires:
+            - deploy_approval
