@@ -38,12 +38,15 @@ workflows:
   pipeline:
     jobs:
       - build
-      - api_tests
-      - package
+      - api_tests:
+          requires:
+            - build
+      - package:
+          requires:
+            - api_tests
       - deploy_approval:
           type: approval
           requires:
-            - build
             - package
       - deploy:
           requires:
