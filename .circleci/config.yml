@@ -7,32 +7,32 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Sleep for 3 min
-          command: sleep 180
+          name: Sleep for 1 min
+          command: sleep 60
   api_tests:
     docker:
       - image: ruby:3.0.0
     steps:
       - checkout
       - run:
-          name: Sleep for 2 min
-          command: sleep 120
+          name: Sleep for 30 sec
+          command: sleep 30
   package:
     docker:
       - image: ruby:3.0.0
     steps:
       - checkout
       - run:
-          name: Sleep for 3 min
-          command: sleep 180
+          name: Sleep for 1 min
+          command: sleep 60
   deploy:
     docker:
       - image: ruby:3.0.0
     steps:
       - checkout
       - run:
-          name: Sleep for 2 min
-          command: sleep 120
+          name: Sleep for 30 sec
+          command: sleep 30
 
 workflows:
   pipeline:
